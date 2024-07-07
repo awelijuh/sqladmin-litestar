@@ -857,8 +857,9 @@ async def login(sqladmin: Admin, request: Request) -> Response:
 async def logout(sqladmin: Admin, request: Request) -> Response:
     assert sqladmin.authentication_backend is not None
 
-    await sqladmin.authentication_backend.logout(request)
-    return Redirect(request.url_for("admin:index"), status_code=302)
+    extra_response_params = {}
+    await sqladmin.authentication_backend.logout(request, extra_response_params)
+    return Redirect(request.url_for("admin:index"), status_code=302, **extra_response_params)
 
 
 async def ajax_lookup(sqladmin: Admin, request: Request) -> Response:

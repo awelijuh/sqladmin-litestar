@@ -21,14 +21,14 @@ class AuthenticationBackend:
             session_config.middleware,
         ]
 
-    async def login(self, request: Request, extra_response_params) -> bool:
+    async def login(self, request: Request, extra_response_params: dict) -> bool:
         """Implement login logic here.
         You can access the login form data `await request.form()`
         andvalidate the credentials.
         """
         raise NotImplementedError()
 
-    async def logout(self, request: Request) -> bool:
+    async def logout(self, request: Request, extra_response_params: dict) -> bool:
         """Implement logout logic here.
         This will usually clear the session with `request.session.clear()`.
         """
