@@ -840,8 +840,8 @@ async def login(sqladmin: Admin, request: Request) -> Response:
             name="login.html",
             request=request,
         )
-
-    ok = await sqladmin.authentication_backend.login(request)
+    extra_response_params = {}
+    ok = await sqladmin.authentication_backend.login(request, extra_response_params)
     if not ok:
         context["error"] = "Invalid credentials."
         return sqladmin.templates.TemplateResponse(
@@ -851,7 +851,7 @@ async def login(sqladmin: Admin, request: Request) -> Response:
             status_code=400,
         )
 
-    return Redirect(request.url_for("admin:index"), status_code=302)
+    return Redirect(request.url_for("admin:index"), status_code=302, **extra_response_params)
 
 
 async def logout(sqladmin: Admin, request: Request) -> Response:

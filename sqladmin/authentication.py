@@ -21,7 +21,7 @@ class AuthenticationBackend:
             session_config.middleware,
         ]
 
-    async def login(self, request: Request) -> bool:
+    async def login(self, request: Request, extra_response_params) -> bool:
         """Implement login logic here.
         You can access the login form data `await request.form()`
         andvalidate the credentials.
