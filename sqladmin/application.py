@@ -389,7 +389,7 @@ class Admin(BaseAdminView, InitPluginProtocol):
                 name="admin:list",
                 media_type=MediaType.HTML,
                 http_method="GET",
-            )(list),
+            )(list_view),
             HTTPRouteHandler(
                 "/{identity:str}/details/{pk:str}",
                 name="admin:details",
@@ -635,7 +635,7 @@ async def index(sqladmin: Admin, request: Request) -> Response:
 
 
 @login_required
-async def list(sqladmin: Admin, request: Request) -> Response:
+async def list_view(sqladmin: Admin, request: Request) -> Response:
     """List route to display paginated Model instances."""
 
     await sqladmin._list(request)
